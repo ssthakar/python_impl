@@ -157,12 +157,12 @@ def train(config_file, pde_batch_size: int, n_epoch : int):
         
         # model check point 
         if epoch%5000 == 0:
-            torch.save(model,'model.pth')
+            torch.save(model,'model_checkpoint.pth')
         
         # break loop if convergence is achieved
         if total_loss/n_iterations < config['pinn']['abs_tol']:
             break
-
+        torch.save(model,'model.pth')
 
 def main():
     train('config.json',2000,20000)
