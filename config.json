@@ -1,0 +1,106 @@
+{
+  "internal_grid": {
+    "x_min": -0.5, 
+    "x_max": 0.5, 
+    "nx": 50,
+    "y_min": -1,
+    "y_max": 1,
+    "ny" : 100,
+    "t_min": 0,
+    "t_max": 0.5,
+    "nt": 50,
+    "n_samples": 10000
+  }, 
+  "initial_grid": {
+    "x_min": -0.5, 
+    "x_max": 0.5, 
+    "nx": 50,
+    "y_min": -1,
+    "y_max": 1,
+    "ny" : 100,
+    "t_min": 0,
+    "t_max": 0.0,
+    "nt" : 1,
+    "n_samples": 1000,
+    "r": 0.25
+  },
+  "left_grid": {
+    "x_min": -0.5, 
+    "x_max": -0.5, 
+    "nx": 1,
+    "y_min": -1,
+    "y_max": 1,
+    "ny" : 100,
+    "t_min": 0,
+    "t_max": 0.5,
+    "nt" : 50,
+    "n_samples": 150
+  },
+  "right_grid": {
+    "x_min": 0.5, 
+    "x_max": 0.5, 
+    "nx": 1,
+    "y_min": -1,
+    "y_max": 1,
+    "ny" : 100,
+    "t_min": 0,
+    "t_max": 0.5,
+    "nt" : 50,
+    "n_samples": 150
+  },
+  "bottom_grid": {
+    "x_min": -0.5, 
+    "x_max": 0.5, 
+    "nx": 50,
+    "y_min": -1,
+    "y_max": -1,
+    "ny" : 1,
+    "t_min": 0,
+    "t_max": 0.5,
+    "nt" : 50,
+    "n_samples": 150
+  },
+  "top_grid": {
+    "x_min": -0.5, 
+    "x_max": 0.5, 
+    "nx": 50,
+    "y_min": 1,
+    "y_max": 1,
+    "ny" : 1,
+    "t_min": 0,
+    "t_max": 0.5,
+    "nt" : 50,
+    "n_samples": 150
+  },
+  "pinn" : {
+    "input_dim": 3,
+    "output_dim": 4,
+    "n_hidden_layers": 10,
+    "hidden_layer_dim": 100,
+    "t_min":0,
+    "abs_tol": 1e-3
+  },
+  "thermo" : {
+    "Mo": 0.0001,
+    "epsilon": 0.01,
+    "rhoL": 1000,
+    "rhoG": 1,
+    "muL": 10,
+    "muG": 0.1,
+    "sigma": 0.96,
+    "g" : -0.98
+  },
+  "ic":{
+    "t_min" : 0,
+    "t_step": 0.5,
+    "x_c": 0,
+    "y_c": -0.5,
+    "r" : 0.25
+  },
+  "pde": {
+
+  },
+  "bc": {
+
+  }
+}
