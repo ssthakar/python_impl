@@ -2,26 +2,26 @@
   "internal_grid": {
     "x_min": -0.5, 
     "x_max": 0.5, 
-    "nx": 50,
+    "nx": 200,
     "y_min": -1,
     "y_max": 1,
-    "ny" : 100,
+    "ny" : 400,
     "t_min": 0,
     "t_max": 0.5,
-    "nt": 50,
-    "n_samples": 10000
+    "nt": 200,
+    "n_samples": 20000
   }, 
   "initial_grid": {
     "x_min": -0.5, 
     "x_max": 0.5, 
-    "nx": 50,
+    "nx": 200,
     "y_min": -1,
     "y_max": 1,
-    "ny" : 100,
+    "ny" : 400,
     "t_min": 0,
     "t_max": 0.0,
     "nt" : 1,
-    "n_samples": 1000,
+    "n_samples": 2000,
     "r": 0.25
   },
   "left_grid": {
@@ -30,10 +30,10 @@
     "nx": 1,
     "y_min": -1,
     "y_max": 1,
-    "ny" : 100,
+    "ny" : 400,
     "t_min": 0,
     "t_max": 0.5,
-    "nt" : 50,
+    "nt" : 200,
     "n_samples": 150
   },
   "right_grid": {
@@ -42,34 +42,34 @@
     "nx": 1,
     "y_min": -1,
     "y_max": 1,
-    "ny" : 100,
+    "ny" : 400,
     "t_min": 0,
     "t_max": 0.5,
-    "nt" : 50,
+    "nt" : 200,
     "n_samples": 150
   },
   "bottom_grid": {
     "x_min": -0.5, 
     "x_max": 0.5, 
-    "nx": 50,
+    "nx": 200,
     "y_min": -1,
     "y_max": -1,
     "ny" : 1,
     "t_min": 0,
     "t_max": 0.5,
-    "nt" : 50,
+    "nt" : 200,
     "n_samples": 150
   },
   "top_grid": {
     "x_min": -0.5, 
     "x_max": 0.5, 
-    "nx": 50,
+    "nx": 200,
     "y_min": 1,
     "y_max": 1,
     "ny" : 1,
     "t_min": 0,
     "t_max": 0.5,
-    "nt" : 50,
+    "nt" : 200,
     "n_samples": 150
   },
   "pinn" : {
@@ -78,7 +78,7 @@
     "n_hidden_layers": 10,
     "hidden_layer_dim": 100,
     "t_min":0,
-    "abs_tol": 1e-3
+		"abs_tol": 1e-3
   },
   "thermo" : {
     "Mo": 0.0001,
