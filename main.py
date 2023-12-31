@@ -53,7 +53,7 @@ def train(config_file, pde_batch_size: int, n_epoch : int):
     # construct intial condition loss object
     ic = IC(config['ic'],config['thermo'],model,device)
     
-    # construct optimizer class instance
+    # construct optimizer class instance, pass model paramters to optimizer, set learning rate
     optim = torch.optim.Adam(model.parameters(), lr=0.0005)  # Initialize Adam optimizer0I
 
     # list of grids that don't require batching, use this to populate all dicts
