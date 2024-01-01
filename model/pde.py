@@ -37,8 +37,9 @@ class PDE():
             * p - pressure
         
         """
+        # inputs to the neural network N_samples X 3
         self.x = x
-        # forward feed to get output and input
+        # outputs of the neural network N_samples X 4
         self.y = self.model.net(self.x)
 
     def phi(self):
@@ -62,6 +63,7 @@ class PDE():
         """
         c  = self.y[:,3]
         c_g = gradients(c,self.x)[0]
+        # return the spatial gradient of phasefield marker 
         grad_c = c_g[:,0:2]
         return  self.phi()*grad_c
 

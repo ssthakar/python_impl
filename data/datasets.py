@@ -65,7 +65,7 @@ class Grid2D(Dataset):
         t_bounds = np.linspace(
             self.config['t_min'],
             self.config['t_max'],
-            self.config['ny'])
+            self.config['nt'])
         x_grid,y_grid,t_grid = np.meshgrid(x_bounds,y_bounds,t_bounds)
         # vectorize the meshgrid for random sampling using indices
         self.samples[0] = torch.tensor(

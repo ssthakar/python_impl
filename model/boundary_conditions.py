@@ -11,8 +11,8 @@ class BC():
         * class to construct supervised loss based on boundary conditions
     """
     def __init__(self, config : Dict,thermo : Dict, model : PINN, device):
-        self.config = config
-        self.thermo = thermo
+        self.config = config        # class constructor config
+        self.thermo = thermo        # thermo properties config
         self.device = device
         self.model  = model
         self.x = torch.empty(1,device = self.device)
@@ -22,8 +22,9 @@ class BC():
             * updates input and output features for boundary loss object, using
             neural net forward pass
         """
-        self.x = x
-        self.y = self.model.net(x)
+        self.x = x                  #input features
+        self.y = self.model.net(x)  #output features
+
     def slip_wall(self,normal_dir : int,tangential_dir : int):
         """
             * computes the slip velocity loss, tangential dir and normal dir are wrt
@@ -40,6 +41,7 @@ class BC():
         target_loss = torch.zeros_like(tangential_vel_grad)
         return torch.nn.functional.mse_loss(tangential_vel_grad,target_loss)+ \
             torch.nn.functional.mse_loss(normal_vel,target_loss)
+    
     def no_slip_wall(self):
         """
             * computes no slip wall loss for given boundary

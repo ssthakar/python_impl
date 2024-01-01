@@ -17,6 +17,7 @@ class PINN(nn.Module):
        'output_dim' : number of output features
        'n_hidden_layers': number of hidden layers
        'hidden_layer_dim' : number of neurons in each hidden layer
+       'abs_tol': target loss for the optimizer
     
     * device agnostic
 
