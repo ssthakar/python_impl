@@ -113,8 +113,10 @@ class PDE():
         phi_y_g = gradients(phi_y,self.x)[0]
         phi_xx = phi_x_g[:,0:1]
         phi_yy = phi_y_g[:,1:2]
+        # construct residual
         loss = c_t + u*c_x + v*c_y - \
             (self.thermo['epsilon']**2)*(phi_xx + phi_yy)
+        # residual is loss 
         target_loss = torch.zeros_like(loss)
         return torch.nn.functional.mse_loss(loss,target_loss)
 
@@ -148,7 +150,7 @@ class PDE():
         v_g = gradients(v,self.x)[0]
         c_g = gradients(c,self.x)[0]
         p_g = gradients(p,self.x)[0]
-        # get partial derivatives needed in the equation
+        # get partial derivatives needed in the residual
         u_t = u_g[:,2:3]
         u_x = u_g[:,0:1]
         u_y = u_g[:,1:2]
@@ -226,9 +228,4 @@ class PDE():
             self.continuity_loss() + self.x_momentum_loss() + \
             self.y_momentum_loss()
     
-
-    def test_loss(self):
-        grad = gradients(self.y[:,0:1],self.x)
-        print(grad)
-
 
