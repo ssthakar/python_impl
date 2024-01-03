@@ -80,9 +80,10 @@ class PDE():
         c = self.y[:,3:4]
         abs_c = torch.abs(c)
         """
-            * torch.where is element wise operation
-            out_i = { input_i       if condition
-                    { other_i       otherwise
+            * torch.where is element wise operation:
+
+                out_i = { input_i       if condition
+                        { other_i       otherwise
         """
         return torch.where(abs_c <= 1,c,torch.sign(c))
     
@@ -109,7 +110,7 @@ class PDE():
         phi_x = phi_g[:,0:1]
         phi_y = phi_g[:,1:2]
         phi_x_g = gradients(phi_x,self.x)[0]
-        phi_y_g = gradients(phi_y,self.y)[0]
+        phi_y_g = gradients(phi_y,self.x)[0]
         phi_xx = phi_x_g[:,0:1]
         phi_yy = phi_y_g[:,1:2]
         loss = c_t + u*c_x + v*c_y - \
