@@ -51,3 +51,7 @@ class BC():
         target_loss = torch.zeros_like(u)
         return torch.nn.functional.mse_loss(u,target_loss) + \
             torch.nn.functional.mse_loss(v,target_loss)
+    def zero_gradient(self:,normal_dir: int, tangential_dir : int):
+        """
+            * general zero_gradient condition
+        """

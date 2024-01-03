@@ -182,16 +182,16 @@ def train(config_file, pde_batch_size: int, n_epoch : int,debug_mode  :bool):
         optim.step()
         
         # print out loss info for monitoring purposes
-        if epoch%10 == 0 & epoch != 0:
+        if epoch%10 == 0 and epoch != 0:
             logging.info(total_loss/n_iterations)
         
         # model check point 
-        if epoch%5000 == 0 & epoch!=0:
+        if epoch%5000 == 0 and epoch!=0:
             torch.save(model,'model_checkpoint.pth')
         
         # break loop if convergence is achieved
         if total_loss/n_iterations < config['pinn']['abs_tol']:
+            torch.save(model,'model.pth')
             break
-        torch.save(model,'model.pth')
 
 
