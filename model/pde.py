@@ -55,17 +55,22 @@ class PDE():
         c_y_g = gradients(c_y,self.x)[0]
         c_xx = c_x_g[:,0:1]
         c_yy = c_y_g[:,1:2]
-        return c**3 -c - c_xx - c_yy
+        return c**3 -c - (c_xx - c_yy)*self.thermo['epsilon']
 
     def surface_tension(self):
         """
             returns the surface tension term needed in the momemtum equations
         """
+        sigma = self.thermo['sigma']
+        epsilon = self.thermo['epsilon']
+        # this the constant value of 3*sqrt(2)/4, I have stored in the dict 
+        C = self.thermo['C']
         c  = self.y[:,3]
         c_g = gradients(c,self.x)[0]
         # return the spatial gradient of phasefield marker 
         grad_c = c_g[:,0:2]
-        return  self.phi()*grad_c
+        # return the two dimensional surface tension force vector
+        return  self.phi()*grad_c*3*C*sigma/epsilon
 
     def c_bar(self):
         """
@@ -74,7 +79,13 @@ class PDE():
         """
         c = self.y[:,3:4]
         abs_c = torch.abs(c)
+        """
+            * torch.where is element wise operation
+            out_i = { input_i       if condition
+                    { other_i       otherwise
+        """
         return torch.where(abs_c <= 1,c,torch.sign(c))
+    
     def thermo_prop(self,propL,propG):
         """
             * computes the thermophysical properties of the mixture

@@ -51,7 +51,15 @@ class BC():
         target_loss = torch.zeros_like(u)
         return torch.nn.functional.mse_loss(u,target_loss) + \
             torch.nn.functional.mse_loss(v,target_loss)
-    def zero_gradient(self:,normal_dir: int, tangential_dir : int):
+    def zero_gradient(self, normal_dir: int,field_index : int):
         """
-            * general zero_gradient condition
+            * zero_gradient condition for a generic scalar field variable for cartesiang grids
         """
+        # get field var whose gradient is needed
+        field_var = self.y[:,field_index:field_index+1]
+        zero_grad = gradients(field_var,self.x)[0]
+        # component of gradient along normal direction
+        zero_grad_n = zero_grad[:,normal_dir:normal_dir+1]
+        target_loss = torch.zeros_like(field_var)
+        return torch.nn.functional.mse_loss(zero_grad_n,target_loss)
+

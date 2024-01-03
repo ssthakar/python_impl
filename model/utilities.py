@@ -96,7 +96,7 @@ def model_inference(config :Dict, t_final : float, model : PINN):
     device = model.net.input_layer.bias.device
     inputs = get_spatial_grid(config,t_final,device)
     # inference
-    outputs = model.forward(inputs)
+    outputs = model.net(inputs)
     # print(outputs.size())
     return inputs,outputs
 

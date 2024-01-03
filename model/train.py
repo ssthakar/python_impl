@@ -9,7 +9,7 @@ from data.datasets import Grid2D
 from torch.utils.data import DataLoader
 import torch
 import model.utilities as util
-import logging
+import logging as log
 
 def train(config_file, pde_batch_size: int, n_epoch : int,debug_mode  :bool):
     """
@@ -21,7 +21,7 @@ def train(config_file, pde_batch_size: int, n_epoch : int,debug_mode  :bool):
     """
     # set device for the training process
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    logging.info(f"Training on: {device}")
+    log.info(f"Training on: {device}")
 
     # main config, holds all other configs, json load
     config = util.read_configs(config_file)
@@ -183,7 +183,7 @@ def train(config_file, pde_batch_size: int, n_epoch : int,debug_mode  :bool):
         
         # print out loss info for monitoring purposes
         if epoch%10 == 0 and epoch != 0:
-            logging.info(total_loss/n_iterations)
+            log.info(total_loss/n_iterations)
         
         # model check point 
         if epoch%5000 == 0 and epoch!=0:
@@ -191,7 +191,9 @@ def train(config_file, pde_batch_size: int, n_epoch : int,debug_mode  :bool):
         
         # break loop if convergence is achieved
         if total_loss/n_iterations < config['pinn']['abs_tol']:
+            # save converged model for later use
             torch.save(model,'model.pth')
+            # break out of epoch loop 
             break
 
 
