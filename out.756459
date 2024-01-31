@@ -1,0 +1,65 @@
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@gpu02>
+Subject: Job 756459: <#!/bin/bash;#BSUB -n 1;#BSUB -W 48:00;#BSUB -q gpu; #BSUB -R "select[rtx2080]";#BSUB -gpu "num=1:mode=shared:mps=no";#BSUB -o out.%J;#BSUB -e err.%J; # load cuda module;module load cuda/12.0;module load conda;source /home/ssthakar/.bashrc;conda activate /usr/local/usrapps/aicfd/ssthakar/conda_envs/ml_env ;# cd into the directory containing the run.sh file;CASE_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd );cd $CASE_DIR; # export CUDA_VISIBLE_DEVICES=0; python main.py> in cluster <Hazel> Done
+
+Job <#!/bin/bash;#BSUB -n 1;#BSUB -W 48:00;#BSUB -q gpu; #BSUB -R "select[rtx2080]";#BSUB -gpu "num=1:mode=shared:mps=no";#BSUB -o out.%J;#BSUB -e err.%J; # load cuda module;module load cuda/12.0;module load conda;source /home/ssthakar/.bashrc;conda activate /usr/local/usrapps/aicfd/ssthakar/conda_envs/ml_env ;# cd into the directory containing the run.sh file;CASE_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd );cd $CASE_DIR; # export CUDA_VISIBLE_DEVICES=0; python main.py> was submitted from host <login04> by user <ssthakar> in cluster <Hazel> at Wed Jan 31 00:52:10 2024
+Job was executed on host(s) <gpu02>, in queue <gpu>, as user <ssthakar> in cluster <Hazel> at Wed Jan 31 00:52:12 2024
+</home/ssthakar> was used as the home directory.
+</share/aicfd/ssthakar/python_impl> was used as the working directory.
+Started at Wed Jan 31 00:52:12 2024
+Terminated at Wed Jan 31 00:52:58 2024
+Results reported at Wed Jan 31 00:52:58 2024
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -n 1
+#BSUB -W 48:00
+#BSUB -q gpu
+
+#BSUB -R "select[rtx2080]"
+#BSUB -gpu "num=1:mode=shared:mps=no"
+#BSUB -o out.%J
+#BSUB -e err.%J
+
+# load cuda module
+module load cuda/12.0
+module load conda
+source /home/ssthakar/.bashrc
+conda activate /usr/local/usrapps/aicfd/ssthakar/conda_envs/ml_env 
+# cd into the directory containing the run.sh file
+CASE_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+cd $CASE_DIR
+
+# export CUDA_VISIBLE_DEVICES=0
+
+python main.py
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   27.37 sec.
+    Max Memory :                                 3 GB
+    Average Memory :                             2.25 GB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                9
+    Run time :                                   56 sec.
+    Turnaround time :                            48 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <err.756459> for stderr output of this job.
+

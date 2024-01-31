@@ -3,8 +3,8 @@
 #BSUB -W 48:00
 #BSUB -q gpu
 
-# #BSUB -R "select[a10]"
-#BSUB -gpu "num=1:mode=shared:mps=yes"
+#BSUB -R "select[rtx2080]"
+#BSUB -gpu "num=1:mode=shared:mps=no"
 #BSUB -o out.%J
 #BSUB -e err.%J
 
@@ -17,6 +17,6 @@ conda activate /usr/local/usrapps/aicfd/ssthakar/conda_envs/ml_env
 CASE_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $CASE_DIR
 
-export CUDA_VISIBLE_DEVICES=0
+# export CUDA_VISIBLE_DEVICES=0
 
 python main.py
