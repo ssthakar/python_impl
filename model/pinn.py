@@ -22,7 +22,7 @@ class PINN(nn.Module):
     * device agnostic
 
     """
-    def __init__(self,config : Dict) -> None:
+    def __init__(self,config : Dict,act_func) -> None:
         super().__init__()
         # neural net attributes
         self.input_dim = config['input_dim']
@@ -37,7 +37,7 @@ class PINN(nn.Module):
         )
         self.net.add_module(
             'input_layer_activation',
-            nn.SiLU()
+            act_func()
         )
         # add the hidden layers
         for n in range(self.n_hidden_layers):
@@ -49,7 +49,7 @@ class PINN(nn.Module):
             nn.init.xavier_normal_(self.net[-1].weight)
             self.net.add_module(
                 f'hidden_layer_activation_{n}',
-                nn.SiLU()
+                act_func()
             )
         self.net.add_module(
             'output_layer',

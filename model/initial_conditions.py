@@ -15,15 +15,15 @@ class IC():
         self.device = device
         self.model = model
         self.model_prev = model
-        self.x = torch.empty(1,device = self.device)
-        self.y = torch.empty(1,device = self.device)
+        self.input = torch.empty(1,device = self.device)
+        self.output = torch.empty(1,device = self.device)
 
-    def update_features(self,x):
+    def update_features(self,input):
         """
             upate input and output features using neural network forward pass
         """
-        self.x = x
-        self.y = self.model.net(x)
+        self.input = input
+        self.output = self.model.net(input)
     
     def c_at_initial_time(self):
         """
@@ -32,8 +32,8 @@ class IC():
         # check if t0 = 0, then use the bubble suspended in water condition
         if self.config['t_min'] == 0:
             r = self.config['r']
-            x_coords = self.x[:,0:1]
-            y_coords = self.x[:,1:2]
+            x_coords = self.input[:,0:1]
+            y_coords = self.input[:,1:2]
             xc = self.config['x_c']
             yc = self.config['y_c']
             z = (torch.sqrt((x_coords - xc)**2+(y_coords-yc)**2) - r)/(math.sqrt(2)*self.thermo['epsilon'])
@@ -42,7 +42,7 @@ class IC():
         else:
             # grad flag so neural net clone does not update when optimizer steps
             with torch.no_grad():
-                c_initial = self.model_prev.net(self.x)[:,3:4]
+                c_initial = self.model_prev.net(self.input)[:,3:4]
         return c_initial
             
     
@@ -51,10 +51,10 @@ class IC():
             * get x velocity at initial time
         """
         if self.config['t_min'] == 0:
-            u_initial = torch.zeros_like(self.x[:,0:1])
+            u_initial = torch.zeros_like(self.output[:,0:1])
         else:
             with torch.no_grad():
-                u_initial = self.model_prev.net(self.x)[:,0:1]
+                u_initial = self.model_prev.net(self.input)[:,0:1]
         return u_initial
     
     def v_at_initial_time(self):
@@ -62,10 +62,10 @@ class IC():
             * get y velocity at initial time
         """
         if self.config['t_min'] == 0:
-            v_initial = torch.zeros_like(self.x[:,1:2])
+            v_initial = torch.zeros_like(self.output[:,1:2])
         else:
             with torch.no_grad():
-                v_initial = self.model_prev.net(self.x)[:,1:2]
+                v_initial = self.model_prev.net(self.input)[:,1:2]
         return v_initial
     
     def update_initial_condition(self):
@@ -81,10 +81,10 @@ class IC():
         self.model_prev.load_state_dict(self.model.state_dict())
     
     def loss(self):
-        target_loss = torch.zeros_like(self.x[:,0:1])
-        u = self.y[:,0:1]
-        v = self.y[:,1:2]
-        c = self.y[:,3:4]
+        target_loss = torch.zeros_like(self.input[:,0:1])
+        u = self.output[:,0:1]
+        v = self.output[:,1:2]
+        c = self.output[:,3:4]
         c_initial = self.c_at_initial_time()
         u_initial = self.u_at_initial_time()
         v_initial = self.v_at_initial_time()
@@ -106,7 +106,7 @@ class IC():
         with torch.no_grad():
 
         # update just the input features from this function
-            self.x = spatial_grid
+            self.input = spatial_grid
             c = self.c_at_initial_time()[:,0]
             u = self.u_at_initial_time()[:,0]
             v = self.v_at_initial_time()[:,0]

@@ -120,4 +120,3 @@ class Grid2D(Dataset):
         return torch.stack(self.inputs,1).requires_grad_(True)
 
 
-
