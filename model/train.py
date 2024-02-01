@@ -90,7 +90,7 @@ def train(config_file, pde_batch_size: int, n_epoch : int,debug_mode  :bool):
     scheduler = StepLR(optim, step_size=5000, gamma=0.1)
 
     """
-        * sanity check for seeing in model inputs are within bounds and correct
+        * sanity check for seeing if model inputs are within bounds and correct
     """
     if debug_mode:
         initial_grid.update_input()

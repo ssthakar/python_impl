@@ -34,7 +34,7 @@
     "t_min": 0,
     "t_max": 0.5,
     "nt" : 200,
-    "n_samples": 150
+    "n_samples": 300
   },
   "right_grid": {
     "x_min": 0.5, 
@@ -46,7 +46,7 @@
     "t_min": 0,
     "t_max": 0.5,
     "nt" : 200,
-    "n_samples": 150
+    "n_samples": 300
   },
   "bottom_grid": {
     "x_min": -0.5, 
@@ -58,7 +58,7 @@
     "t_min": 0,
     "t_max": 0.5,
     "nt" : 200,
-    "n_samples": 150
+    "n_samples": 300
   },
   "top_grid": {
     "x_min": -0.5, 
@@ -70,7 +70,7 @@
     "t_min": 0,
     "t_max": 0.5,
     "nt" : 200,
-    "n_samples": 150
+    "n_samples": 300
   },
   "pinn" : {
     "input_dim": 3,

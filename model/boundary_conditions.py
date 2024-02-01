@@ -42,7 +42,7 @@ class BC():
         target_loss = torch.zeros_like(vel_grad)
         return torch.nn.functional.mse_loss(vel_grad,target_loss)+ \
             torch.nn.functional.mse_loss(normal_vel,target_loss)
-    
+
     def no_slip_wall(self):
         """
             * computes no slip wall loss for given boundary
@@ -52,5 +52,3 @@ class BC():
         target_loss = torch.zeros_like(u)
         return torch.nn.functional.mse_loss(u,target_loss) + \
             torch.nn.functional.mse_loss(v,target_loss)
-
-

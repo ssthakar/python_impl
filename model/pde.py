@@ -1,8 +1,11 @@
+"""
+    * module to train a pinn to simulate the Hyesing benchmark
+"""
+import math
 from typing import Dict
 import torch
 from .pinn import PINN
 from .utilities import gradients
-import math
 class PDE():
     """
         * Class to construct the unsupervised loss from the governing Equations:
@@ -22,7 +25,7 @@ class PDE():
         self.thermo = thermo
         self.model = model
         self.device = device
-        self.input = torch.empty(1,device = self.device) 
+        self.input = torch.empty(1,device = self.device)
         self.output = torch.empty(1,device = self.device)
 
     def update_features(self,input):
@@ -66,10 +69,10 @@ class PDE():
         """
         sigma = self.thermo['sigma']
         epsilon = self.thermo['epsilon']
-        # this the constant value of 3*sqrt(2)/4, I have stored in the dict 
+        # this the constant value of 3*sqrt(2)/4, I have stored in the dict
         c  = self.output[:,3:4]
         c_g = gradients(c,self.input)[0]
-        # return the spatial gradient of phasefield marker 
+        # return the spatial gradient of phasefield marker
         grad_c = c_g[:,0:2]
         # return the two dimensional surface tension force vector
         return  (self.phi()*grad_c*sigma*3*math.sqrt(2))/(epsilon*4)
@@ -89,13 +92,13 @@ class PDE():
                         { other_i       otherwise
         """
         return torch.where(abs_c <= 1,c,torch.sign(c))
-    
-    def thermo_prop(self,propL,propG):
+
+    def thermo_prop(self,prop_l,prop_g):
         """
             * computes the thermophysical properties of the mixture
         """
         c_bar = self.c_bar()
-        return 0.5*(1+c_bar)*propL + 0.5*(1-c_bar)*propG
+        return 0.5*(1+c_bar)*prop_l + 0.5*(1-c_bar)*prop_g
 
     def cahn_hilliard_loss(self):
         """
@@ -119,7 +122,7 @@ class PDE():
         # construct residual
         loss = c_t + u*c_x + v*c_y - \
             (self.thermo['Mo'])*(phi_xx + phi_yy)
-        # residual is loss 
+        # residual is loss
         target_loss = torch.zeros_like(loss)
         return torch.nn.functional.mse_loss(loss,target_loss)
 
@@ -230,5 +233,3 @@ class PDE():
         return self.cahn_hilliard_loss() + \
             self.continuity_loss() + self.x_momentum_loss() + \
             self.y_momentum_loss()
-    
-

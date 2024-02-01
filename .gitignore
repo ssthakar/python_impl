@@ -1,2 +1,6 @@
 lib
 lib64
+bin
+training.log
+*.rc
+include
